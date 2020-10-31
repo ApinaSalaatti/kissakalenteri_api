@@ -29,7 +29,7 @@ steps:
   settings:
     script:
       - rm -rf /home/ci_user/deploy/.git
-      - /bin/cp -rf /home/ci_user/deploy/* /var/www/html/kissakalenteri/
+      - /bin/cp -rf /home/ci_user/deploy/* /var/www/kissakalenteri_api/
     host:
       from_secret: host_prod
     username:
