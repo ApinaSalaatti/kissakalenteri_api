@@ -14,6 +14,10 @@ steps:
     key:
       from_secret: ssh_key_prod
     port: 22
+    rm: false
+    source: 
+      - "/drone/src/*"
+    overwrite: true
     target: /home/ci_user/deploy
   when:
     branch:
