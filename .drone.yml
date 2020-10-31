@@ -1,8 +1,9 @@
 ---
 kind: pipeline
 type: docker
-name: deploy
+name: deploy data
 
+steps:
 - name: move files to production
   image: appleboy/drone-scp
   settings:
@@ -23,8 +24,7 @@ name: deploy
   settings:
     script:
       - rm -rf /home/ci_user/deploy/.git
-      - rm -rf /home/ci_user/deploy/phpcs.phar
-      - /bin/cp -rf /home/ci_user/deploy/* /var/www/html/kissakalenteri
+      - /bin/cp -rf /home/ci_user/deploy/* /var/www/html/kissakalenteri/
     host:
       from_secret: host_prod
     username:
