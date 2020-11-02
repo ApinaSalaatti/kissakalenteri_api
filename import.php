@@ -5,9 +5,8 @@ $config = new \App\Config();
 
 $db = new \App\Database("root", "", "kissakalenteri");
 
-$inputFolder = "C:\\xampp\\htdocs\\kissakalenteri_tools\\images\\test\\";
-$targetFolder = "C:\\xampp\\htdocs\\kissakalenteri_tools\\images\\test_target\\";
-
+$inputFolder = $config->importPath;
+$targetFolder = $config->imagePath;
 
 $incoming = scandir($inputFolder);
 

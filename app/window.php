@@ -1,4 +1,4 @@
-<?php namespace Calendar;
+<?php namespace App;
 	
 class Window {
     private $db;
@@ -9,8 +9,6 @@ class Window {
     }
     
     private function validDate($year, $day) {
-        //return true;
-        
         $currY = intval(date("Y"));
         $currM = intval(date("m"));
         $currD = intval(date("d"));
@@ -34,38 +32,39 @@ class Window {
     
     private function getImageRecord($year, $day) {
         $image = $this->db->query("SELECT * FROM window_images WHERE year=$year AND day=$day");
-        if(count($image) > 0) {
-            return $image[0];
-        }
-        else {
-            // 404
-        }
+        $row = $image->fetch_assoc();
+        return $row;
     }
 
     private function showData($filename) {
-        if(file_exists($filename)) {
-            $imginfo = getimagesize($filename);
-            $cType = $imginfo['mime'];
-            header("Content-type: $cType");
-            readfile($filename);
+        if(!$filename) {
+            throw new HttpErrorCodeException(404);
         }
         else {
-            // 404
+            $filename = $this->dir . $filename;
+            if(file_exists($filename)) {
+                $imginfo = getimagesize($filename);
+                $cType = $imginfo['mime'];
+                header("Content-type: $cType");
+                readfile($filename);
+            }
+            else {
+                throw new HttpErrorCodeException(404);
+            }
         }
     }
     
     public function get($params) {
         $year = intval($params['year']);
         $day = intval($params['day']);
-        
+
         if($this->validDate($year, $day)) {
             $image = $this->getImageRecord($year, $day);
             $filename = $image["filename"];
-            $filename = $this->dir . $filename;
             $this->showData($filename);
         }
         else {
-            // 403
+            throw new HttpErrorCodeException(403);
         }
     }
     
@@ -76,11 +75,10 @@ class Window {
         if($this->validDate($year, $day)) {
             $image = $this->getImageRecord($year, $day);
             $filename = $image["thumb_filename"];
-            $filename = $this->dir . $filename;
             $this->showData($filename);
         }
         else {
-            // 403
+            throw new HttpErrorCodeException(403);
         }
     }
     
@@ -97,7 +95,7 @@ class Window {
             $this->get($params);
         }
         else {
-            // 404
+            throw new HttpErrorCodeException(404);
         }
     }
 }

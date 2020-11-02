@@ -4,4 +4,7 @@ class Config {
     public $database = "dbname";
     public $user = "dbuser";
     public $password = "dbpassword";
+
+    public $imagePath = "/path/to/images/"
+    public $importPath = "/path/to/importable/images/";
 }
