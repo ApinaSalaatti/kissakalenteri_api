@@ -40,8 +40,8 @@ foreach($days as $key => $data) {
     $y = $data["year"];
     $d = $data["day"];
 
-    rename($inputFolder . $i, $targetFolder . $i);
-    rename($inputFolder . $t, $targetFolder . $t);
+    if($i) rename($inputFolder . $i, $targetFolder . $i);
+    if($t) rename($inputFolder . $t, $targetFolder . $t);
 
     $db->query("INSERT INTO window_images(year, day, filename, thumb_filename) values($y, $d, '$i', '$t');");
 }
