@@ -3,7 +3,7 @@ require_once "loader.php";
 
 $config = new \App\Config();
 
-$db = new \App\Database("root", "", "kissakalenteri");
+$db = new \App\Database($config->user, $config->password, $config->database);
 
 $inputFolder = $config->importPath;
 $targetFolder = $config->imagePath;
