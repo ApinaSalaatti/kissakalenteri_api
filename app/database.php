@@ -8,10 +8,6 @@ class Database {
 
     public function query($q) {
         return $this->mysqli->query($q);
-
-        if ($this->mysqli->connect_errno) {
-            echo "Failed to connect to MySQL: " . $this->mysqli->connect_error;
-        }
     }
 
 }
