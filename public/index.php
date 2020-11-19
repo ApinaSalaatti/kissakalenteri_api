@@ -1,5 +1,8 @@
 <?php
 
+// Allow CORS
+header("Access-Control-Allow-Origin: *");
+
 require_once "../loader.php";
 
 $myPath = dirname($_SERVER['PHP_SELF']);
