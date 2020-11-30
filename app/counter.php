@@ -23,7 +23,7 @@ class Counter {
 
     public function getVisitors() {
         $year = date("Y");
-        $d = $this->db->query("SELECT visitors FROM visitors");
+        $d = $this->db->query("SELECT * FROM visitors");
         $retval = [];
         while ($row = $d->fetch_assoc()) {
             $retval[$row["year"]] = $row["visitors"];
