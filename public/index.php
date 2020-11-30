@@ -3,6 +3,9 @@
 // Allow CORS
 header("Access-Control-Allow-Origin: *");
 
+// Ensure we are on Finnish timezone
+date_default_timezone_set("Europe/Helsinki");
+
 require_once "../loader.php";
 
 $myPath = dirname($_SERVER['PHP_SELF']);
