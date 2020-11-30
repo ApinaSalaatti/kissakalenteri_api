@@ -23,7 +23,7 @@ try {
     if(count($queryParts) == 1 && $queryParts[0] == "visitors") {
         $v = $counter->getVisitors();
         foreach($v as $year => $visitors) {
-            echo $year . " : " . $visitors;
+            echo $year . " : " . $visitors . "<br/>";
         }
     }
     else if($last == "thumb" && count($queryParts) == 3) {
@@ -33,7 +33,7 @@ try {
     else if(count($queryParts) == 2) {
         // Add visitor counter
         $counter->newVisitor();
-        
+
         // getting the main image
         $window->get(["year" => $queryParts[0], "day" => $queryParts[1]]);
     }
