@@ -10,7 +10,7 @@ class Counter {
     public function newVisitor() {
         $year = date("Y");
         $d = $this->db->query("SELECT visitors FROM visitors WHERE year=$year");
-        $row = $image->fetch_assoc();
+        $row = $d->fetch_assoc();
         if($row && isset($row["visitors"])) {
             // Got it
             $newCount = intval($row["visitors"]) + 1;
