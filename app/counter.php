@@ -25,7 +25,7 @@ class Counter {
         $year = date("Y");
         $d = $this->db->query("SELECT visitors FROM visitors");
         $retval = [];
-        while ($row = $result->fetch_array()) {
+        while ($row = $d->fetch_assoc()) {
             $retval[$row["year"]] = $row["visitors"];
         }
 
