@@ -18,12 +18,22 @@ $config = new \App\Config();
 try {
     $db = new \App\Database($config->user, $config->password, $config->database);
     $window = new \App\Window($db, $config->imagePath);
+    $counter = new \App\Counter($db);
 
-    if($last == "thumb" && count($queryParts) == 3) {
+    if(count($queryParts) == 1 && $queryParts[0] == "visitors") {
+        $v = $counter->getVisitors();
+        foreach($v as $year => $visitors) {
+            echo $year . " : " . $visitors;
+        }
+    }
+    else if($last == "thumb" && count($queryParts) == 3) {
         // Getting a thumb
         $window->thumb(["year" => $queryParts[0], "day" => $queryParts[1]]);
     }
     else if(count($queryParts) == 2) {
+        // Add visitor counter
+        $counter->newVisitor();
+        
         // getting the main image
         $window->get(["year" => $queryParts[0], "day" => $queryParts[1]]);
     }
